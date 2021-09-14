@@ -11,4 +11,5 @@ The team project draws on datasets from Inside Airbnb which is an independent op
 
 ## Contributors
 This project is submitted in fulfillment of the requirements for the course [Data Preparation & Workflow Management](https://dprep.hannesdatta.com/)
+
 Team 8: Dave Jongenelen, Funda Nadiroglu, Alberto Rizzuti, [Vere Schulpen](https://github.com/VereSchulpen), Jaromir Weenink
