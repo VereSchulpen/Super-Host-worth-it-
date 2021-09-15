@@ -1,6 +1,7 @@
 # Short project title
 
 __Research Question__
+Is there a difference in pricing between super hosts and non-super hosts in Venice?
 
 ## Motivation
 
