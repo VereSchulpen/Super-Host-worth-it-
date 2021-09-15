@@ -32,4 +32,4 @@ Point interested users to any related literature and/or documentation.
 ## About
 This project is submitted in fulfillment of the requirements for the course [Data Preparation & Workflow Management](https://dprep.hannesdatta.com/)
 
-Team 8: Dave Jongenelen, Funda Nadiroglu, Alberto Rizzuti, [Vere Schulpen](https://github.com/VereSchulpen), Jaromir Weenink
+Team 8: [Dave Jongenelen](Davejongenelen), [Funda Nadiroglu](fundab2b), [Alberto Rizzuti](Albirizzu), [Vere Schulpen](https://github.com/VereSchulpen), [Jaromir Weenink](JaromirW99)
