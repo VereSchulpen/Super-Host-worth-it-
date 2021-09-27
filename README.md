@@ -23,6 +23,11 @@ The team project draws on datasets from [Inside Airbnb](http://insideairbnb.com/
 
 A quantitative analysis will be made on the dataset of Airbnb to answer the research question wether there is difference in pricing between super hosts and non-super hosts. The method is quantitative because we measure in numbers. The columns of the dataset of Venice will be analysed from an CSV file in R-studio and uploaded to Github.
 
+A simple linear regression will be used as our method to analyse if there is a difference in pricing between super hosts and non-superhosts. This due to the fact that our independent variable will be a binary variable. Hereby the independent variable (IV) host_is_superhost will first be transformed into a binary variable, a so-called dummy variable. Furthermore, the dependent variable (DV) price has to be transformed into a numeric.  
+
+
+
+
 
 First, introduce and motivate your chosen method, and explain how it contributes to solving the research question/business problem.
 
