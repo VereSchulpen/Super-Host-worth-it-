@@ -1,7 +1,6 @@
 # Loading and inspecting data
 install.packages("RCurl")
 library (RCurl)
-Venice_cvs <- getURL("https://docs.google.com/spreadsheets/d/1qbIZPLBJ-4dadd7s8o_e_CiFI-HuvCvvFXxOr-0sO24/edit#gid=1736010364")
 Venice_cvs <- getURL("https://docs.google.com/spreadsheets/d/1HYUZRLB7-KCr5jwXQnl3OH4KSReK1HO9LmKbU7f3V5c/edit#gid=402527890")
 Venice_data <- read.csv (text = Venice_cvs)
 
