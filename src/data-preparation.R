@@ -1,11 +1,11 @@
 # Loading and inspecting data
-library(readr)
+install.packages("RCurl")
+library (RCurl)
+Venice_cvs <- getURL("https://docs.google.com/spreadsheets/d/1qbIZPLBJ-4dadd7s8o_e_CiFI-HuvCvvFXxOr-0sO24/edit#gid=1736010364")
+Venice_data <- read.csv (text = Venice_cvs)
 
-venice <- read_csv("../data/venice_data.csv")
-
-View(Venice)
-summary(Venice)
-
+View(Venice_data)
+summary(Venice_data)
 
 # Data cleaning and transformation
 Venice_data <- Venice[ c("id","host_id","host_is_superhost","host_listings_count","property_type","room_type","price","minimum_nights","number_of_reviews","review_scores_rating","reviews_per_month") ]
