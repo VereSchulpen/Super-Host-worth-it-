@@ -1,7 +1,8 @@
 # Loading and inspecting data
 library(readr)
-setwd("C:/Users/DAVE/MA/dPrep/listings/")
-Venice <- read_csv("Venice.csv")
+
+venice <- read_csv("../data/venice_data.csv")
+
 View(Venice)
 summary(Venice)
 
