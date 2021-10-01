@@ -2,6 +2,10 @@
 #### CLEAN DATA ######
 ######################
 
+# Create a copy in gen/input
+dir.create("./gen/data-preparation/input")
+file.copy("./data/dataset1/venice1.csv","./gen/data-preparation/input/venice1.csv")
+
 #Load dataset into R
 df1 <- read.csv("./gen/data-preparation/input/venice1.csv")
 
