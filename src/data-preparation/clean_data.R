@@ -28,6 +28,9 @@ df_cleaned[c(6331, 6464, 6938),]
 # remove the three founded rows based on their id
 df_cleaned <-df_cleaned[!(df_cleaned$id=="42279260" | df_cleaned$id=="43205683" | df_cleaned$id=="45683814"),]
 
+#Transform df_cleaned$host_is_superhost into a binary variable
+df_cleaned$host_is_superhost_binary <- ifelse(df_cleaned$host_is_superhost == 't', 1, 0)
+df_cleaned$host_is_superhost_binary [is.na(df_cleaned$host_is_superhost_binary)] <- 0
 
 # Transform df_cleaned$price into a numeric variable
 df_cleaned$price_numeric <- as.numeric(gsub('[$,]', '', df_cleaned$price))
