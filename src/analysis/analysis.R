@@ -11,6 +11,10 @@ View(mean)
 # estimate the actual linear regression model
 df_cleaned_lm1 <- lm(price_numeric ~ host_is_superhost_binary, df_cleaned); summary(df_cleaned_lm1)
 
+#hypothesis testing, independent samples t-test
+leveneTest(price_numeric ~ as.factor(host_is_superhost_binary), df_cleaned, center=mean)
+t.test(price_numeric ~ as.factor(host_is_superhost_binary), df_cleaned, var.equal=TRUE)
+
 #Model1
 m1 <- lm(price_num ~ host_is_superhost, df_cleaned)
 
