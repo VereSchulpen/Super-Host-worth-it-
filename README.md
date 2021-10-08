@@ -16,8 +16,8 @@ Our results will help Airbnb hosts and Superhosts get more information on pricin
 
 ## Data
 The team project draws on datasets from [Inside Airbnb](http://insideairbnb.com/get-the-data.html) which is an independent open-source data tool developed by community activist Murray Cox who aims to shed light on how [Airbnb](http://airbnb.com) is being used and affecting neighborhoods in large cities. The tool provides a visual overview of the amount, availability, and spread of rooms across a city, as well as an approximation of the number of bookings and occupancy rate.
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/2560px-Airbnb_Logo_B%C3%A9lo.svg.png" width="40%">
+https://idsb.tmgrup.com.tr/ly/uploads/images/2021/06/23/123886.jpg
+<img src="https://idsb.tmgrup.com.tr/ly/uploads/images/2021/06/23/123886.jpg" width="40%">
 
 ## Method and results
 
