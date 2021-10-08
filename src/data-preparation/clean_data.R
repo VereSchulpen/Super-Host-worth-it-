@@ -28,12 +28,9 @@ df_cleaned[c(6331, 6464, 6938),]
 # remove the three founded rows based on their id
 df_cleaned <-df_cleaned[!(df_cleaned$id=="42279260" | df_cleaned$id=="43205683" | df_cleaned$id=="45683814"),]
 
-#Transform price to numeric variable
-library(tidyverse)
-df_cleaned <- df_cleaned %>%  
-  mutate(price = str_remove_all(price, fixed("$"))) %>% 
-  mutate(price = str_remove_all(string = price, pattern = fixed(","))) %>% 
-  mutate(as.numeric(x = price))
+
+# Transform df_cleaned$price into a numeric variable
+df_cleaned$price_numeric <- as.numeric(gsub('[$,]', '', df_cleaned$price))
 
 # Save cleaned data
 dir.create("./gen/data-preparation/output")
