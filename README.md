@@ -9,7 +9,7 @@ The purpose of this research is to figure out if there is a difference in pricin
 First of all, we need to explain what "Superhosts" are. Those are experienced hosts who provide a shining example for other hosts and extraordinary experiences for their guests. Airbnb checks Superhosts’ activity four times a year, to ensure that the program highlights the people who are most dedicated to providing outstanding hospitality.
 
 Why did we choose Venice? Venice is one of the three most visited cities in Italy with 12.948.519 of tourists in 2019 (ISTAT website - National Institute of Statistics, Nov, 2020) and with 7947 accommodations on Airbnb (Inside Airbnb, Aug 6, 2021). 
-<img src="https://idsb.tmgrup.com.tr/ly/uploads/images/2021/06/23/123886.jpg" width="40%">
+<img src="https://idsb.tmgrup.com.tr/ly/uploads/images/2021/06/23/123886.jpg" width="70%"> 
 
 Price is one of the main factors guests consider when choosing where to stay. The price difference and competitiveness in the market leads hosts many times to change their pricing strategy. Usually Superhosts have more visibility and earning potential, but does this mean a higher price than a host without the Superhost label? In this research, we will investigate the correlation between pricing and type of host and as it may change the hosts' strategies.
 
