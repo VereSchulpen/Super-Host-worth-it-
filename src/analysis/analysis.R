@@ -8,9 +8,11 @@ mean(df_cleaned$price_numeric)
 mean <- subset(df_cleaned, !is.na(price_numeric) & !is.na(host_is_superhost_binary)) %>% group_by(host_is_superhost_binary) %>% summarize(mean = mean(price_numeric)) 
 View(mean)
 
+# estimate the actual linear regression model
+df_cleaned_lm1 <- lm(price_numeric ~ host_is_superhost_binary, df_cleaned); summary(df_cleaned_lm1)
+
 #Model1
 m1 <- lm(price_num ~ host_is_superhost, df_cleaned)
-
 
 # Save results
 save(m1, file="./gen/analysis/output/model_results.RData")
