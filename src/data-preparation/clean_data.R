@@ -19,21 +19,23 @@ df_cleaned <- df_cleaned[!duplicated(df_cleaned$id), ]
 
 # search and remove if there are N/A's in the DV (price) and IV (host_is_superhost)
 df_cleaned <- df_cleaned[!is.na(df_cleaned$host_is_superhost), ]
-df_cleaned <- df_cleaned[!is.na(df_cleaned$price), ]
+df_cleaned <- df_cleaned[!is.na(df_cleaned$price), ] 
+# Do the same to remove N/A's in the column bedrooms, while if there is no bedroom guests can't sleep. 
+df_cleaned <- df_cleaned[!is.na(df_cleaned$bedrooms), ]
 
-# search for price value's equal to $0
-which(df1$price_numeric == 0) 
-# search for the id of the host of the given rows
-df_cleaned[c(6331, 6464, 6938),]
-# remove the three founded rows based on their id
-df_cleaned <-df_cleaned[!(df_cleaned$id=="42279260" | df_cleaned$id=="43205683" | df_cleaned$id=="45683814"),]
+# Transform df_cleaned$price into a numeric variable
+df_cleaned$price_numeric <- as.numeric(gsub('[$,]', '', df_cleaned$price))
+
+# search if there are price value's equal to $0
+which(df_cleaned$price_numeric == 0) # these were not found
+# search if there are bed value's equal to $0
+which(df_cleaned$beds == 0) # a lot of rows with bed value 0 were found
+# select only observations for bed value's not equal to 0
+df_cleaned <- df_cleaned %>% filter(beds != 0)
 
 #Transform df_cleaned$host_is_superhost into a binary variable
 df_cleaned$host_is_superhost_binary <- ifelse(df_cleaned$host_is_superhost == 't', 1, 0)
 df_cleaned$host_is_superhost_binary [is.na(df_cleaned$host_is_superhost_binary)] <- 0
-
-# Transform df_cleaned$price into a numeric variable
-df_cleaned$price_numeric <- as.numeric(gsub('[$,]', '', df_cleaned$price))
 
 # Save cleaned data
 dir.create("./gen/data-preparation/output")
