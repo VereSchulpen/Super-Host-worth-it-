@@ -14,7 +14,7 @@ df1 <- read.csv("./gen/data-preparation/input/venice1.csv")
 #Remove variables we don't need
 df_cleaned <- df1[c("id", "host_id", "host_is_superhost", "property_type", "room_type", "bedrooms", "beds", "price", "number_of_reviews", "review_scores_rating", "reviews_per_month")]  
 
-# search and remove if there are duplicate id's 
+# search and remove if there are duplicated id's 
 df_cleaned <- df_cleaned[!duplicated(df_cleaned$id), ]
 
 # search and remove if there are N/A's in the DV (price) and IV (host_is_superhost)
