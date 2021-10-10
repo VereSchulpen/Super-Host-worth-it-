@@ -16,16 +16,12 @@ if(df_cleaned$price_numeric[1] > mean(df_cleaned$price_numeric)){
 mean <- subset(df_cleaned, !is.na(price_numeric) & !is.na(host_is_superhost_binary)) %>% group_by(host_is_superhost_binary) %>% summarize(mean = mean(price_numeric)) 
 View(mean)
 
-# estimate the actual linear regression model
-df_cleaned_lm1 <- lm(price_numeric ~ host_is_superhost_binary, df_cleaned); summary(df_cleaned_lm1)
+# estimate the actual linear regression model - model1
+m1 <- lm(price_numeric ~ host_is_superhost_binary, df_cleaned); summary(df_cleaned_lm1)
 
 #hypothesis testing, independent samples t-test
 leveneTest(price_numeric ~ as.factor(host_is_superhost_binary), df_cleaned, center=mean)
 t.test(price_numeric ~ as.factor(host_is_superhost_binary), df_cleaned, var.equal=TRUE)
-
-#Model1
-m1 <- lm(price_num ~ host_is_superhost, df_cleaned)
-
 
 # compare different price ranges
 # price > $0 and <= $50
