@@ -3,6 +3,7 @@
 ######################
 #Load library
 library(tidyverse)
+library(gtsummary)
 
 # Create a copy in gen/input
 dir.create("./gen/data-preparation/input")

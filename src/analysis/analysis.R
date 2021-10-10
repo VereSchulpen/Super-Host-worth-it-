@@ -1,3 +1,6 @@
+#library
+library(car)
+
 #loaddata
 load("./gen/analysis/input/data_cleaned.RData")
 
@@ -17,7 +20,7 @@ mean <- subset(df_cleaned, !is.na(price_numeric) & !is.na(host_is_superhost_bina
 View(mean)
 
 # estimate the actual linear regression model - model1
-m1 <- lm(price_numeric ~ host_is_superhost_binary, df_cleaned); summary(df_cleaned_lm1)
+m1 <- lm(price_numeric ~ host_is_superhost_binary, df_cleaned); summary(m1)
 
 #hypothesis testing, independent samples t-test
 leveneTest(price_numeric ~ as.factor(host_is_superhost_binary), df_cleaned, center=mean)
@@ -68,4 +71,7 @@ lm_250 <- lm(price_numeric ~ host_is_superhost_binary, df_cleaned6); summary(lm_
 
 
 # Save results
-save(m1, file="./gen/analysis/output/model_results.RData")
+dir.create("./gen/analysis/output")
+save(m1, lm_0_and_50, lm_50_and_100, lm_100_and_150, lm_150_and_200, lm_200_and_250,  file="./gen/analysis/output/model_results.RData")
+
+
