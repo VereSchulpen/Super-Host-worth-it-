@@ -16,7 +16,7 @@ gen/analysis/output/model_results.Rdata: src/analysis/update_input.R src/analysi
 		R --vanilla < src/analysis/update_input.R
 		R --vanilla < src/analysis/analysis.R
 	
-gen/paper/output/barplot_IV.pdf gen/paper/output/boxplot.pdf gen/paper/output/combination_DV_and_IV.pdf: src/paper/update_input.R src/paper/figure.R
+gen/paper/output/barplot_IV.pdf gen/paper/output/boxplot.pdf gen/paper/output/combination_DV_and_IV.pdf: src/paper/update_input.R src/paper/figures.R
 		R --vanilla < src/paper/update_input.R
-		R --vanilla < src/paper/figure.R
+		R --vanilla < src/paper/figures.R
 		
