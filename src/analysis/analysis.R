@@ -1,5 +1,6 @@
 #library
 library(car)
+library(dplyr)
 
 #loaddata
 load("./gen/analysis/input/data_cleaned.RData")
@@ -23,7 +24,6 @@ View(mean)
 m1 <- lm(price_numeric ~ host_is_superhost_binary, df_cleaned); summary(m1)
 
 #hypothesis testing, independent samples t-test
-leveneTest(price_numeric ~ as.factor(host_is_superhost_binary), df_cleaned, center=mean)
 t.test(price_numeric ~ as.factor(host_is_superhost_binary), df_cleaned, var.equal=TRUE)
 
 # compare different price ranges
