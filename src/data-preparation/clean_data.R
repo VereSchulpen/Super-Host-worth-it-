@@ -27,6 +27,9 @@ df_cleaned <- df_cleaned[!is.na(df_cleaned$bedrooms), ]
 # Transform df_cleaned$price into a numeric variable
 df_cleaned$price_numeric <- as.numeric(gsub('[$,]', '', df_cleaned$price))
 
+# transform host_is_superhost into logical 
+df_cleaned$host_is_superhost <- ifelse(df_cleaned$host_is_superhost == 't', TRUE, FALSE)
+
 # search if there are price value's equal to $0
 which(df_cleaned$price_numeric == 0) # these were not found
 # search if there are bed value's equal to $0
@@ -35,7 +38,7 @@ which(df_cleaned$beds == 0) # a lot of rows with bed value 0 were found
 df_cleaned <- df_cleaned %>% filter(beds != 0)
 
 #Transform df_cleaned$host_is_superhost into a binary variable
-df_cleaned$host_is_superhost_binary <- ifelse(df_cleaned$host_is_superhost == 't', 1, 0)
+df_cleaned$host_is_superhost_binary <- ifelse(df_cleaned$host_is_superhost == TRUE, 1, 0)
 df_cleaned$host_is_superhost_binary [is.na(df_cleaned$host_is_superhost_binary)] <- 0
 
 # Save cleaned data
