@@ -1,3 +1,7 @@
+#####################
+### UPDATE INPUT ####
+#####################
+
 # Copy output from data-preparation into input folder 
 dir.create("./gen/paper")
 dir.create("./gen/paper/input/")

@@ -1,6 +1,7 @@
 ######################
 #### CLEAN DATA ######
 ######################
+
 #Load library
 library(tidyverse)
 library(gtsummary)
