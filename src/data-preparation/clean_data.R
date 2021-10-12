@@ -45,11 +45,3 @@ df_cleaned$host_is_superhost_binary [is.na(df_cleaned$host_is_superhost_binary)]
 dir.create("./gen/data-preparation/output")
 save(df_cleaned,file="./gen/data-preparation/output/data_cleaned.RData")
 
-# Summary of the data
-summary(df_cleaned$price)
-summary(df_cleaned$host_is_superhost_binary)
-
-summary(df_cleaned)
-
-table_summary_statistics <- tbl_summary(df_cleaned)
-print(table_summary_statistics)
