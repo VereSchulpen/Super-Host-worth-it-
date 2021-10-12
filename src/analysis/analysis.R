@@ -1,12 +1,18 @@
 #library
 library(car)
 library(dplyr)
+library(gtsummary)
 
 #loaddata
 load("./gen/analysis/input/data_cleaned.RData")
 
 # Calculate the average price of a room in Venice
 mean(df_cleaned$price_numeric)
+
+# Summary of the data
+summary(df_cleaned$price_numeric)
+summary(df_cleaned$host_is_superhost_binary)
+summary(df_cleaned)
 
 # Compare the price of a specific host with the average price of all hosts in Venice
 # So a we can see if the host is priced above the average or below the average
