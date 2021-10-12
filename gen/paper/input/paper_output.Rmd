@@ -1,0 +1,41 @@
+---
+title: "Superhost-Worth-It_pdf"
+output: pdf_document
+---
+## Motivation
+
+## Composition
+
+```{r setup, include=FALSE}
+library(dplyr)
+load("data_cleaned.RData" )
+#load("./gen/paper/input/data_cleaned.RData")
+#tinytex::install_tinytex()
+
+library(ggplot2)
+```
+
+First of all, a summary of the data set that is used will be provided. This data set has been cleaned from errors, NA's and abundant data.
+
+```{r, echo=FALSE}
+reduced_df_cleaned <- df_cleaned[,c(3:7, 9:12)]
+summary(reduced_df_cleaned)
+avg_prices_df <- df_cleaned %>% group_by(host_is_superhost) %>% summarise(avg_price=mean(price_numeric))
+ggplot(avg_prices_df, aes(x=host_is_superhost, y=avg_price))+geom_col()
+
+```
+The barplot above shows that super hosts have on average lower prices.
+
+
+Underneath are some summary statistics about the variables used in this study.
+```{r }
+summary(df_cleaned$price_numeric)
+summary(df_cleaned$host_is_superhost_binary)
+
+
+```
+## Cleaning
+
+
+
+
