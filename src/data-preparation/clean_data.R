@@ -1,19 +1,22 @@
 ######################
 #### CLEAN DATA ######
 ######################
+
 #Load library
 library(tidyverse)
 library(gtsummary)
 
 # Create a copy in gen/input
+dir.create("./gen")
+dir.create("./gen/data-preparation")
 dir.create("./gen/data-preparation/input")
 file.copy("./data/dataset1/venice1.csv","./gen/data-preparation/input/venice1.csv")
 
 #Load dataset into R
 df1 <- read.csv("./gen/data-preparation/input/venice1.csv")
 
-#Remove variables we don't need
-df_cleaned <- df1[c("id", "host_id", "host_is_superhost", "property_type", "room_type", "bedrooms", "beds", "price", "number_of_reviews", "review_scores_rating", "reviews_per_month")]  
+#Select variables we would like to use for our analysis
+df_cleaned <- df1[c("id", "host_id", "host_is_superhost", "accommodates", "bedrooms", "beds", "price", "number_of_reviews", "review_scores_rating", "reviews_per_month")]  
 
 # search and remove if there are duplicated id's 
 df_cleaned <- df_cleaned[!duplicated(df_cleaned$id), ]

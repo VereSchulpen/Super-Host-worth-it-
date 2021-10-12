@@ -1,3 +1,7 @@
+##############
+### PLOTS ####
+##############
+
 #Load library
 library(ggplot2)
 
