@@ -60,8 +60,7 @@ The detailed results can be found in the rendered RMarkdown file.
 
 
 ## Repository overview
-
-Provide an overview of the directory structure and files.
+The Repository consist of three folders: data, gen and src.
 
 ## Running instructions
 
