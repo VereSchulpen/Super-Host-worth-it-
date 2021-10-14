@@ -10,10 +10,6 @@ load("./gen/analysis/input/data_cleaned.RData")
 
 ################ first stage analysis #########################
 
-
-# overview of the data
-summary(df_cleaned)
-
 # Compare the average prices of a superhost vs a non-superhost
 mean1 <- subset(df_cleaned, !is.na(price_numeric) & !is.na(superhost_binary)) %>% group_by(superhost_binary) %>% summarize(mean = mean(price_numeric), var = var(price_numeric)) 
 View(mean1)
