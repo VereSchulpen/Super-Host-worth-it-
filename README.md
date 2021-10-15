@@ -68,7 +68,7 @@ Second stage conclusion:
 In two price classes we see a significant difference in the average asking price between the two groups, in the price classes: > $ 100 to $ 150 and > $ 250. But for the outcome 
 of the other price classes, it seems that the pricing does not matter whether you are a super host or not a super host. 
 
-The detailed results can be found in the rendered RMarkdown file.
+The detailed results will be shown in a pdf-file created with a markdown report. 
 
 
 ## Repository overview
