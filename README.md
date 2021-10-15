@@ -72,7 +72,7 @@ The detailed results can be found in the rendered RMarkdown file.
 
 
 ## Repository overview
-The Repository consist of three folders: data, gen and src.
+The Repository consist of three folders: data, gen and src, and three files: .gitignore ,README.md and dprep-team8.Rproj
 
 ## Running instructions
 Required software that has to be installed:
