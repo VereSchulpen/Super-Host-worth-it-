@@ -6,7 +6,7 @@ Is there a difference in pricing between super hosts and non-super hosts in Veni
 ## Motivation
 The purpose of this research is about the following research question: Is there a difference in pricing 
 between super hosts and non-super host? 
-
+e
 In this research, we will investigate the correlation between pricing and type of host and as it may 
 change the hosts' strategies. This will be answered by using a correlational study looking at 
 quantitative data. The correlational study aims to test if there is a correlation between the price 
@@ -75,14 +75,24 @@ The detailed results can be found in the rendered RMarkdown file.
 The Repository consist of three folders: data, gen and src.
 
 ## Running instructions
+Required software that has to be installed:
+- R and R studio 
+- Make
 
-Explain to potential users how to run/replicate your workflow. Touch upon, if necessary, the required input data, which (secret) credentials are required (and how to obtain them), which software tools are needed to run the workflow (including links to the installation instructions), and how to run the workflow. Make use of subheaders where appropriate.
+In Rstudio the following packages need to be installed:
+- *ggplot2*
+- *dplyr*
+- *car*
+- *broom*
 
-The output of the study can be found in the ['Superhost worth it?'](https://github.com/VereSchulpen/Super-Host-worth-it-/blob/main/gen/paper1/input/paper_output.pdf) file. This file is publically available via Github. Opening this pdf-file via RStudio requires users to download LaTeX or run the following code in RStudio: *tinytex::install_tinytex()*. For running the file, the following packages need to be downloaded as well: *ggplot2*, *dplyr*, *car*, and *broom*. 
+The output of the study can be found in the ['Superhost worth it?'](https://github.com/VereSchulpen/Super-Host-worth-it-/blob/main/gen/paper1/input/paper_output.pdf) 
+file. This file is publically available via Github. Opening this pdf-file via RStudio requires users to download LaTeX or run the following code in RStudio: 
+*tinytex::install_tinytex()*
+
 
 ## More resources    
 
-Point interested users to any related literature and/or documentation.
+[Normality assumptions]. (n.d.) Retrieved 2021, October 15, from: https://www.datanovia.com/en/lessons/transform-data-to-normal-distribution-in-r/
 
 ## About
 This project is submitted in fulfillment of the requirements for the course [Data Preparation & Workflow Management](https://dprep.hannesdatta.com/)
