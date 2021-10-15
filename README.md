@@ -66,7 +66,9 @@ The Repository consist of three folders: data, gen and src.
 
 Explain to potential users how to run/replicate your workflow. Touch upon, if necessary, the required input data, which (secret) credentials are required (and how to obtain them), which software tools are needed to run the workflow (including links to the installation instructions), and how to run the workflow. Make use of subheaders where appropriate.
 
-## More resources
+The output of the study can be found in the ['Superhost worth it?'](https://github.com/VereSchulpen/Super-Host-worth-it-/blob/main/gen/paper1/input/paper_output.pdf) file. This file is publically available via Github. Opening this pdf-file via RStudio requires users to download LaTeX or run the following code in RStudio: tinytex::install_tinytex(). For running the file, the following packages need to be downloaded as well: *ggplot2*, *dplyr*, *car*, and *broom*. 
+
+## More resources    
 
 Point interested users to any related literature and/or documentation.
 
