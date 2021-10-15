@@ -4,6 +4,16 @@ output: pdf_document
 ---
 ## Motivation
 
+The purpose of this research is about the following research question: Is there a difference in pricing between super hosts and non-super host? In this research, we will 
+investigate the correlation between pricing and type of host and as it may change the hosts' strategies. This will be answered by using a correlational study looking at 
+quantitative data. The correlational study aims to test if there is a correlation between the price variable and the host_is_supehost variable. For this, a simple linear 
+regression will be used. This due to the fact that we have one independent variable and one dependent variable. The idea behind this analysis is that it will return an equation 
+where the coefficients are given. When this equation is created, X1 can be filled in with either a 1 (for super host) or a 0 (for non-superhost). The equation will then 
+eventually calculate the average price asked by a super host or non-super host. Finally, these results can be compared on whether a host in Venice with the label super  host ask 
+on average a higher or lower price than a host without the label of a super host. This will help, potential users, like Airbnb hosts and super hosts to get more information on 
+pricing strategy and adjust it based on the type of hosts they are and the experiences they offer. It can be deployed by a PDF report where the results of the analysis are 
+explained in a clear way. 
+
 ## Composition
 
 ```{r setup, include=FALSE}
