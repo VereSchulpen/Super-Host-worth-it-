@@ -66,4 +66,8 @@ df_cleaned6 <- df_cleaned %>% filter(price_numeric > 250)
 # Save cleaned data
 dir.create("./gen/data-preparation/output")
 save(df_cleaned,file="./gen/data-preparation/output/data_cleaned.RData")
+dir.create("./gen/paper1")
+dir.create("./gen/paper1/input")
+save(df_cleaned,file="./gen/paper1/input/data_cleaned.RData")
+
 

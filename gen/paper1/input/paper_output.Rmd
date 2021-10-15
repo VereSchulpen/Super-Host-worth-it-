@@ -1,0 +1,212 @@
+---
+title: "Superhost Worth It?"
+output: pdf_document
+---
+# Results of the study
+This file provides users of the data set with the main findings of the research that has been done. The first part is about the structure of the data set, then some assumptions are tested. After that comes the analysis, which consists of two parts: the first part concludes that there is a significant difference in prices of super hosts and non-super hosts. The second part of the analysis results in the significant difference in prices when considering price classes. Hereby, the results show that the classes > $ 100 to $ 150 and > $ 250 see significant differences in prices between super hosts and non-super hosts. 
+
+
+```{r setup, include=FALSE}
+#prepare file
+load("data_cleaned.RData" )
+library(ggplot2)
+library(dplyr)
+library(car)
+library(broom)
+
+#create subsets
+df_cleaned1 <- df_cleaned %>% filter(price_numeric > 0 & price_numeric <= 50)
+df_cleaned2 <- df_cleaned %>% filter(price_numeric > 50 & price_numeric <= 100)
+df_cleaned3 <- df_cleaned %>% filter(price_numeric > 100 & price_numeric <= 150)
+df_cleaned4 <- df_cleaned %>% filter(price_numeric > 150 & price_numeric <= 200)
+df_cleaned5 <- df_cleaned %>% filter(price_numeric > 200 & price_numeric <= 250)
+df_cleaned6 <- df_cleaned %>% filter(price_numeric > 250)
+```
+
+## Composition
+
+First of all, there will be provided some insights in the data set that is used. This data set has been cleaned from errors, NA's and abundant data. Underneath are summary statistics of different variables in the data set. A first notable insight is the difference between the minimum and maximum prices (min. is $`r min(df_cleaned$price_numeric)`, max. is $`r max(df_cleaned$price_numeric)`). This is the reason for the difference in mean ($`r mean(df_cleaned$price_numeric)`) and the median ($`r median(df_cleaned$price_numeric)`), where some strikingly high prices increase the average considerably. 
+
+```{r, echo=FALSE, message=FALSE}
+#create summary table of the important variables in the dataset
+reduced_df_cleaned <- df_cleaned[,c(3,6:7, 9:12)]
+col_names <- c("Superhost", "Bedrooms", "Beds", "Number of reviews", "Review scores", "Reviews per month", "Price")
+markd_summary <- summary(reduced_df_cleaned)
+knitr::kable(markd_summary, caption = "Summary data", col.names = col_names)
+```
+### Average prices Super Host vs. non-Super Host
+To get insight into the difference between prices by Super Hosts and non-Super Hosts, there's a box plot and two histograms provided underneath. Note that the x-axis at the histograms are in logarithmic scale, due to the range in price. 
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#create boxplot of the different average prices of superhosts and non-hosts
+avg_prices_df <- df_cleaned %>% group_by(superhost) %>% summarise(avg_price=mean(price_numeric))
+ggplot(avg_prices_df, aes(x=superhost, y=avg_price))+geom_col() + ggtitle("Average price Super Host vs. non-Super Host") + labs(x="Superhost", y="Average Price") 
+
+```
+The findings are that the average price by a super host is $138.57 and the average price asked by a non-super host is $161.23. Meaning that on average hosts with the label non-super host ask a higher price for their listings. But as could be seen in the summary statistics, there is a considerable range in the prices. To get insight in this, there following histograms are provided:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#create histograms of the prices of superhosts and non-superhosts
+price_range_superhost <- df_cleaned %>% filter(superhost==TRUE) 
+price_range_nonsuperhost <- df_cleaned %>% filter(superhost==FALSE) 
+ggplot(price_range_nonsuperhost, aes(x=price_numeric)) + geom_histogram() + scale_x_log10() + ggtitle("Histogram of prices by non-Super Hosts") + labs(x="Price (log10)", y="Count") 
+ggplot(price_range_superhost, aes(x=price_numeric)) + geom_histogram() + scale_x_log10() + ggtitle("Histogram of prices by Super Hosts") + labs(x="Price (log10)", y="Count") 
+```
+
+# Analysis
+
+## First study
+
+### Levene's test
+To formally test the variance in price between superhosts and non-superhosts, a t-test will be performed. Hereby, we first need to check an assumption: whether the variances of the dependent variable (“price_numeric”) are equal across the two groups (super host vs non-super host) . This will be done by a LeveneTest. 
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#Levene's test
+leveneTest(price_numeric ~ superhost, df_cleaned, center=mean)
+```
+The null hypothesis is that the variances are equal and the findings are that this test has a p-value of 1.237e-07 , meaning that we can reject the null hypothesis. So we can assume that the variances are not equal across these two groups. 
+
+### T-test
+
+Now the actual t-test will be performed. Where the var.equal will be set to FALSE, as we assumed in the LeveneTest that the variances were not equal across the two groups. 
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#execute t-test
+t.test(price_numeric ~ superhost, df_cleaned, var.equal=FALSE)
+```
+
+The null hypothesis here is that the means in these two groups are similar to each other. The findings are that this test has a p-value = 1.862e-05, meaning that the null hypothesis can be rejected. Indicating that we can assume that the means in these two groups are not similar. So we can say that the data shows some significant differences between being a super host and not being a super host. 
+
+### Linear regression
+
+Next the actual linear regression model will be estimated. This will give an insight in the relationship between the dependent variable, “price_numeric”, and the independent variable, “superhost”.  Immediately after the model has been estimated, a summary will be asked to check how well the model fits the data. 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#linear regresion on price
+m1 <- lm(price_numeric ~ superhost, df_cleaned)
+markd_lm <- summary(m1)
+markd_lm
+```
+the summary shows the F-statistic of the model, which indicates that the model is significant (p-value < .05, 0.0004361).
+
+The coefficients brings us to the conclusion that whenever hosts are super hosts the price is on average $22.66 lower than hosts that are labelled as non-super hosts. This effect is clearly significant, as the p-value of the coefficient is clearly below 0.05 (p-value = 0.000436).
+
+We also tried to extend the model to look for some interaction between the “superhost” variable and other variables: "number_of_reviews", "review_scores_rating", "reviews_per_month. Whenever estimating a model with the interaction between “superhost” and one of the other three named variables, the coefficient of the “superhost” turned out to be no significant anymore. Therefore, no valid conclusion can be drawn.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#test whether there's an interaction between 'superhosts' and 'number of reviews', 'review ratings', and 'reviews per month'. 
+m2 <- lm(price_numeric ~ superhost * reviews_per_month, df_cleaned); summary(m2)
+```
+### Normality test
+
+So we just continue with the first model, where we want to check on the assumption whether the data is normally distributed. To check for the normality assumption, the residuals should be distributed normally. Therefore, the residuals of model 1 have to be accessed. 
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#check for normality
+m1_res <- augment(m1)
+ggplot(m1_res, aes(.resid)) + geom_histogram(aes(y = ..density..)) + stat_function(fun = dnorm, args = list(mean = mean(m1_res$.resid), sd = sd(m1_res$.resid)), color="red", size=2) + scale_x_log10()
+```
+
+The check for the normality, a histogram of the residuals will be created. The idea behind this is to look for a bell shaped curve. The findings were that there is a bell shaped curve, although it has a very long tail on the right hand side. This indicates that the data is right skewed. 
+
+The findings were that there is a bell shaped curve, although it has a very long tail on the right hand side. This indicates that the data is right skewed. 
+
+Another way to check for normality, is the normal QQ plot. The idea behind this plot is to search for a straight line that moves diagonal. Indicating that the data is normally distributed
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#execute QQ-plot
+qqnorm(m1_res$.std.resid, pch = 1, frame = FALSE)
+```
+The findings are consistent with the previous (histogram) plot, the data is right skewed. The plotted line is curved because of some extreme outliers. 
+
+So we found out that the distribution of the data is positively skewed, meaning that the most frequent values are low, with a tail towards the high values. Therefore, it could be considered to transform the data. However, transforming data can make the interpretation of the analysis much more difficult , when comparing the mean of the two groups after transforming the data it is not to say that there is a difference in the two groups means (Data Novia, 2021). Also, according to Data Novia, analyses like the F or t family of tests (i.e., independent and dependent sample t-tests, ANOVAs, MANOVAs, and regressions), violations of normality are not usually a death sentence for validity. With large enough sample sizes (> 30 or 40), there’s a pretty good chance that the data will be normally distributed. In line of these findings we keep the data how it is.
+
+### Interim conclusion
+
+There are significant differences in the asking price between the two groups ( super host vs non-super host). Meaning that on average the price asked by a host with the label super host is $22.66 lower. 
+
+## Second study
+
+Based the conclusion in the first stage of the analysis, we like to have a closer look on how this conclusion relates to more specific price classed. Therefore, the following price classes will be considered: > $ 0 to $ 50, > $ 50 to $ 100, > $ 100 to $ 150, > $ 150 to $ 200, > $ 200 to $ 250 and > $ 250. Six price classes in total. We perform for every price class the same analysis as for the whole data set in the first stage. But now the intention is to see for which price classes there is a significance difference between the average asking price of a super host vs a non-super host. 
+
+###	Price class: : > $ 0 to $ 50
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+mean_between_0_and_50 <- subset(df_cleaned1, !is.na(price_numeric) & !is.na(superhost)) %>% group_by(superhost) %>% summarise(mean = mean(price_numeric), var = var(price_numeric)) 
+
+leveneTest(price_numeric ~ as.factor(superhost), df_cleaned1, center=mean)
+
+t.test(price_numeric ~ as.factor(superhost), df_cleaned1, var.equal=TRUE)
+
+lm_0_and_50 <- lm(price_numeric ~ superhost, df_cleaned1); summary(lm_0_and_50)
+
+```
+The null hypothesis here is that the means in these two groups are similar to each other. The findings are that this test has a p-value = 0.285, meaning that the null hypothesis cannot be rejected. Indicating that we can assume that the means in these two groups are similar. So we can say that the data does not show some significant differences between being a super host and not being a super host. 
+
+###	Price class: : > $ 50 to $ 100
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+mean_between_50_and_100 <- subset(df_cleaned2, !is.na(price_numeric) & !is.na(superhost_binary)) %>% group_by(superhost_binary) %>% summarise(mean = mean(price_numeric), var = var(price_numeric)) 
+
+leveneTest(price_numeric ~ as.factor(superhost_binary), df_cleaned2, center=mean)
+
+t.test(price_numeric ~ as.factor(superhost_binary), df_cleaned2, var.equal=FALSE)
+
+lm_50_and_100 <- lm(price_numeric ~ superhost_binary, df_cleaned2); summary(lm_50_and_100)
+
+```
+The null hypothesis here is that the means in these two groups are similar to each other. The findings are that this test has a p-value = 0.1814, meaning that the null hypothesis cannot be rejected. Indicating that we can assume that the means in these two groups are similar. So we can say that the data does not show some significant differences between being a super host and not being a super host. 
+
+###	Price class: : > $ 100 to $ 150
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+mean_between_100_and_150 <- subset(df_cleaned3, !is.na(price_numeric) & !is.na(superhost_binary)) %>% group_by(superhost_binary) %>% summarise(mean = mean(price_numeric), var = var(price_numeric)) 
+
+leveneTest(price_numeric ~ as.factor(superhost_binary), df_cleaned3, center=mean)
+
+t.test(price_numeric ~ as.factor(superhost_binary), df_cleaned3, var.equal=TRUE)
+
+lm_100_and_150 <- lm(price_numeric ~ superhost_binary, df_cleaned3); summary(lm_100_and_150)
+
+```
+The null hypothesis here is that the means in these two groups are similar to each other. The findings are that this test has a p-value = 0.009779, meaning that the null hypothesis can be rejected. Indicating that we can assume that the means in these two groups are not similar. So we can say that the data does show some significant differences between being a super host and not being a super host. 
+
+###	Price class: : > $ 150 to $ 200
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+mean_between_150_and_200 <- subset(df_cleaned4, !is.na(price_numeric) & !is.na(superhost_binary)) %>% group_by(superhost_binary) %>% summarise(mean = mean(price_numeric), var = var(price_numeric)) 
+
+leveneTest(price_numeric ~ as.factor(superhost_binary), df_cleaned4, center=mean)
+
+t.test(price_numeric ~ as.factor(superhost_binary), df_cleaned4, var.equal=TRUE)
+
+lm_150_and_200 <- lm(price_numeric ~ superhost_binary, df_cleaned4); summary(lm_150_and_200)
+
+```
+The null hypothesis here is that the means in these two groups are similar to each other. The findings are that this test has a p-value = 0.5879, meaning that the null hypothesis cannot be rejected. Indicating that we can assume that the means in these two groups are similar. So we can say that the data does not show some significant differences between being a super host and not being a super host.
+
+###	Price class: : > $ 200 to $ 250
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+mean_between_200_and_250 <- subset(df_cleaned5, !is.na(price_numeric) & !is.na(superhost_binary)) %>% group_by(superhost_binary) %>% summarise(mean = 
+
+mean(price_numeric), var = var(price_numeric)) 
+
+leveneTest(price_numeric ~ as.factor(superhost_binary), df_cleaned5, center=mean)
+
+t.test(price_numeric ~ as.factor(superhost_binary), df_cleaned5, var.equal=TRUE)
+lm_200_and_250 <- lm(price_numeric ~ superhost_binary, df_cleaned5); summary(lm_200_and_250)
+
+```
+The null hypothesis here is that the means in these two groups are similar to each other. The findings are that this test has a p-value = 0.1884, meaning that the null hypothesis cannot be rejected. Indicating that we can assume that the means in these two groups are similar. So we can say that the data does not show some significant differences between being a super host and not being a super host.
+
+###	Price class: : > $ 250
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+mean_bigger_250 <- subset(df_cleaned6, !is.na(price_numeric) & !is.na(superhost_binary)) %>% group_by(superhost_binary) %>% summarise(mean = 
+
+mean(price_numeric), var = var(price_numeric)) 
+
+leveneTest(price_numeric ~ as.factor(superhost_binary), df_cleaned6, center=mean)
+
+t.test(price_numeric ~ as.factor(superhost_binary), df_cleaned6, var.equal=FALSE)
+lm_250 <- lm(price_numeric ~ superhost_binary, df_cleaned6); summary(lm_250)
+
+```
+The null hypothesis here is that the means in these two groups are similar to each other. The findings are that this test has a p-value = 4.802e-05, meaning that the null hypothesis can be rejected. Indicating that we can assume that the means in these two groups are not similar. So we can say that the data does show some significant differences between being a super host and not being a super host.
+
+# Conclusion
+In 2 price classes we see a significant difference in the average asking price between the two groups, in the price classes: > $ 100 to $ 150 and > $ 250. But the outcome for the other price classes, it seems the pricing does not matter whether you are a super host or not a super host. 
