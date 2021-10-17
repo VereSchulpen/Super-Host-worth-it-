@@ -21,7 +21,7 @@ on average a higher or lower price than a host without the label of a super host
 
 This will help, potential users, like Airbnb hosts and super hosts to get more information on 
 pricing strategy and adjust it based on the type of hosts they are and the experiences they offer. On 
-the other side it helps cutomers in making decision between super hosts and non-superhosts. 
+the other side it helps cutomers in making decision between super hosts and non-super hosts. 
 
 It can be deployed by a PDF report where the results of the analysis are explained in a clear way. 
 
@@ -46,16 +46,16 @@ This chapter will first explain and motivate the proposed research method and af
 The research question of this study will be answered by using a correlational study looking at quantitative 
 data. The correlational study aims to test if there is a correlation between the price variable and the 
 host_is_supehost variable. For this, a simple linear regression will be used. This due to the fact that 
-we have one independent variable and one depedent variable. 
+we have one independent variable and one dependent variable. 
 
 The idea behind this analysis is that it will return an equation where the coefficients are given. When this 
-equation is created, X1 can be filled in with either a 1 (for superhost) or a 0 (for non-superhost). The 
-equation will then eventually calculate the average price asked by a superhost or non-superhost. Finaly, these 
-results can be compared on wheter a host in Venice with the label superhost ask on average a higher or lower 
-price than a host without the label of a superhost. 
+equation is created, X1 can be filled in with either a 1 (for super host) or a 0 (for non-super host). The 
+equation will then eventually calculate the average price asked by a super host or non-super host. Finally, these 
+results can be compared on wheter a host in Venice with the label super host ask on average a higher or lower 
+price than a host without the label of a super host. 
 
 Above the overall idea on how this research will go has been described. However, this research will be divided into two stages. 
-In the first stage, it will analyse the whole cleaned dataset. Whereas, in the seconde stage the cleaned data set will be divided into 6 price classes (> $ 0 to $ 50, > $ 50 to 
+In the first stage, it will analyse the whole cleaned dataset. Whereas, in the second stage the cleaned data set will be divided into 6 price classes (> $ 0 to $ 50, > $ 50 to 
 $ 100, > $ 100 to $ 150, > $ 150 to $ 200, > $ 200 to $ 250 and > $ 250).
 The idea behind this is to see if it differs to be a super host or not in different price classes, so to get a more specific view. 
 
@@ -68,7 +68,7 @@ Second stage conclusion:
 In two price classes we see a significant difference in the average asking price between the two groups, in the price classes: > $ 100 to $ 150 and > $ 250. But for the outcome 
 of the other price classes, it seems that the pricing does not matter whether you are a super host or not a super host. 
 
-The detailed results can be found in the rendered RMarkdown file.
+The detailed results will be shown in a pdf-file created with a ['Markdown report'](https://github.com/VereSchulpen/Super-Host-worth-it-/blob/main/gen/paper1/input/paper_output.pdf). 
 
 
 ## Repository overview
@@ -86,7 +86,7 @@ In Rstudio the following packages need to be installed:
 - *broom*
 
 The output of the study can be found in the ['Superhost worth it?'](https://github.com/VereSchulpen/Super-Host-worth-it-/blob/main/gen/paper1/input/paper_output.pdf) 
-file. This file is publically available via Github. Opening this pdf-file via RStudio requires users to download LaTeX or run the following code in RStudio: 
+file. This file is publicly available via Github. Opening this pdf-file via RStudio requires users to download LaTeX or run the following code in RStudio: 
 *tinytex::install_tinytex()*
 
 
